@@ -1,0 +1,14 @@
+{
+  "name": "zaryab-sundhu",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "turbo dev",
+    "build": "turbo build",
+    "start": "turbo start"
+  },
+  "devDependencies": {
+    "turbo": "^1.12.0",
+    "typescript": "^5.0.0"
+  }
+}

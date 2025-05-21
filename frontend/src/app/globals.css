@@ -1,0 +1,78 @@
+:root {
+  scroll-behavior: smooth;
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Add smooth sliding animation */
+.smooth-slide {
+  scroll-behavior: smooth;
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Add smooth transitions to all sections */
+section {
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Timeline glow animation */
+.glow {
+  box-shadow: 0 0 15px rgba(217, 70, 239, 0.6);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 15px rgba(217, 70, 239, 0.6);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(217, 70, 239, 0.9);
+  }
+  100% {
+    box-shadow: 0 0 15px rgba(217, 70, 239, 0.6);
+  }
+}
+
+
+
+/* Progress Bar Styles */
+.progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 4px;
+  background: linear-gradient(90deg, rgba(59, 130, 246, 1), rgba(168, 85, 247, 1));
+  z-index: 1000;
+  transition: width 0.3s ease;
+}
+
+/* Hide default scrollbar */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Progress Bar Effect */
+body {
+  --scroll: calc(var(--scroll-y) / (var(--scroll-height) - 100vh) * 100);
+  background: linear-gradient(
+    to right,
+    rgba(59, 130, 246, 0.2) 0%,
+    rgba(59, 130, 246, 0.2) var(--scroll),
+    transparent var(--scroll)
+  );
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgb(var(--background-end-rgb))
+  );
+}
