@@ -9,7 +9,12 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Zaryab Sundhu",
-  description: "Zaryab Sundhu Next.js Application",
+  description: "Zaryab Sundhu - Senior Software Engineer | Full-Stack Developer",
+  icons: {
+    icon: '/favicon.svg',
+    shortcut: '/favicon.svg',
+    apple: '/favicon.svg',
+  },
 };
 
 export default function RootLayout({

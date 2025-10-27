@@ -32,8 +32,15 @@ export default function Header() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <a href="#hero" className={"text-xl font-bold text-[#7B61FF]"}>
-              Zaryab
+            <a href="#hero" className="flex items-center space-x-2">
+              <img 
+                src="/logo.svg" 
+                alt="Zaryab Sundhu" 
+                className="w-8 h-8"
+              />
+              <span className="text-xl font-bold text-[#7B61FF]">
+                Zaryab
+              </span>
             </a>
           </div>
 
