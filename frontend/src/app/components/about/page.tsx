@@ -40,18 +40,18 @@ export default function About() {
             </p>
             <p className="text-cyan-100 leading-relaxed">
               Currently, I'm focused on full-stack development using modern
-              technologies like React, Node.js, and AWS. I'm particularly
+              technologies like Next.js, Node.js, and AWS. I'm particularly
               interested in cloud architecture and have successfully led
               multiple projects from conception to deployment.
             </p>
 
             <div className="grid grid-cols-2 gap-4 mt-8">
               <div className="border border-fuchsia-500/30 rounded-lg p-4 bg-indigo-900/50 backdrop-blur-sm shadow-lg shadow-purple-500/20">
-                <h4 className="font-bold text-fuchsia-400">50+</h4>
+                <h4 className="font-bold text-fuchsia-400">10+</h4>
                 <p className="text-cyan-200">Projects Completed</p>
               </div>
               <div className="border border-fuchsia-500/30 rounded-lg p-4 bg-indigo-900/50 backdrop-blur-sm shadow-lg shadow-purple-500/20">
-                <h4 className="font-bold text-fuchsia-400">8+</h4>
+                <h4 className="font-bold text-fuchsia-400">5+</h4>
                 <p className="text-cyan-200">Years Experience</p>
               </div>
             </div>
@@ -84,15 +84,15 @@ export default function About() {
             <div className="grid grid-cols-2 gap-4">
               <div className="p-6 bg-indigo-900/50 backdrop-blur-sm rounded-lg border border-fuchsia-500/30 shadow-lg shadow-purple-500/20">
                 <h4 className="font-bold text-fuchsia-400 mb-2">Frontend</h4>
-                <p className="text-cyan-200">React, Vue, Angular, Next.js</p>
+                <p className="text-cyan-200">Next.js, Blade (Laravel), Razor Pages (ASP.NET)</p>
               </div>
               <div className="p-6 bg-indigo-900/50 backdrop-blur-sm rounded-lg border border-fuchsia-500/30 shadow-lg shadow-purple-500/20">
                 <h4 className="font-bold text-fuchsia-400 mb-2">Backend</h4>
-                <p className="text-cyan-200">Node.js, Python, Java, Go</p>
+                <p className="text-cyan-200">Node.js, Laravel (PHP), ASP.NET Framework, SharePoint</p>
               </div>
               <div className="p-6 bg-indigo-900/50 backdrop-blur-sm rounded-lg border border-fuchsia-500/30 shadow-lg shadow-purple-500/20">
                 <h4 className="font-bold text-fuchsia-400 mb-2">Database</h4>
-                <p className="text-cyan-200">MongoDB, PostgreSQL, Redis</p>
+                <p className="text-cyan-200">MongoDB, PostgreSQL, MySQL</p>
               </div>
               <div className="p-6 bg-indigo-900/50 backdrop-blur-sm rounded-lg border border-fuchsia-500/30 shadow-lg shadow-purple-500/20">
                 <h4 className="font-bold text-fuchsia-400 mb-2">Cloud</h4>
