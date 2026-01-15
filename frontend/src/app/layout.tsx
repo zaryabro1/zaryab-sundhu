@@ -4,6 +4,7 @@ import React from "react";
 import "./globals.css";
 import ProgressBar from "./components/progress-bar";
 import Header from "./components/header/page";
+import AuthProviderWrapper from "../components/auth/AuthProviderWrapper";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,14 +26,16 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body className={inter.className}>
-        {/* <div className="mt-20"> */}
-        <Header />
-        {/* </div> */}
+        <AuthProviderWrapper>
+          {/* <div className="mt-20"> */}
+          <Header />
+          {/* </div> */}
 
-        <main className="pt-4 -mt-8 bg-black">
-          <ProgressBar />
-          {children}
-        </main>
+          <main className="pt-4 -mt-8 bg-black">
+            <ProgressBar />
+            {children}
+          </main>
+        </AuthProviderWrapper>
       </body>
     </html>
   );

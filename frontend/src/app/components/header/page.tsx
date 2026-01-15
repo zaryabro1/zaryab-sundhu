@@ -2,6 +2,8 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMoon } from "@fortawesome/free-solid-svg-icons";
 import { useState, useEffect } from "react";
+import Link from "next/link";
+import { useAuth } from "../../../contexts/AuthContext";
 
 // Easing function for smooth scrolling
 const easeInOutQuad = (t: number, b: number, c: number, d: number): number => {
@@ -13,6 +15,7 @@ const easeInOutQuad = (t: number, b: number, c: number, d: number): number => {
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const { isAuthenticated, user, logout } = useAuth();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -22,6 +25,11 @@ export default function Header() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const handleLogout = () => {
+    logout();
+    window.location.href = '/';
+  };
 
   return (
     <nav
@@ -83,6 +91,29 @@ export default function Header() {
               >
                 Contact
               </a>
+              {isAuthenticated ? (
+                <>
+                  <Link
+                    href="/dashboard"
+                    className="hover:bg-[#1E1E4B] hover:text-[#7B61FF] px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300"
+                  >
+                    Dashboard
+                  </Link>
+                  <button
+                    onClick={handleLogout}
+                    className="hover:bg-[#1E1E4B] hover:text-[#7B61FF] px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300"
+                  >
+                    Logout
+                  </button>
+                </>
+              ) : (
+                <Link
+                  href="/login"
+                  className="hover:bg-[#1E1E4B] hover:text-[#7B61FF] px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300"
+                >
+                  Login
+                </Link>
+              )}
               <button
                 id="themeToggle"
                 className="hover:bg-[#1E1E4B] hover:text-[#7B61FF] px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300"
