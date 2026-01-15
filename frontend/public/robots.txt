@@ -1,0 +1,15 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://zaryabro1.com
+
+# Sitemaps
+Sitemap: https://zaryabro1.com/sitemap.xml
+
+# Allow all bots to access everything
+Disallow:
+
+# Crawl-delay
+Crawl-delay: 10
