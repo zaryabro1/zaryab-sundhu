@@ -80,7 +80,24 @@ const login = async (req, res) => {
     }
 };
 
+const getCurrentUser = async (req, res) => {
+    try {
+        // User is already attached to req by authenticate middleware
+        res.json({
+            user: {
+                id: req.user._id,
+                name: req.user.name,
+                email: req.user.email,
+                createdAt: req.user.createdAt
+            }
+        });
+    } catch (error) {
+        res.status(500).json({ message: 'Failed to get user' });
+    }
+};
+
 module.exports = {
     register,
-    login
+    login,
+    getCurrentUser
 };
