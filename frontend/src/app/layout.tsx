@@ -3,18 +3,27 @@ import { Inter } from "next/font/google";
 import React from "react";
 import "./globals.css";
 import ProgressBar from "./components/progress-bar";
-import Header from "./components/header/page";
+import Header from "./components/header/Header";
 import AuthProviderWrapper from "../components/auth/AuthProviderWrapper";
 
-const inter = Inter({ subsets: ["latin"] });
+/**
+ * Inter is the design system's only family — headings and body both. Exposed
+ * as a CSS variable so `tailwind.config.js` can name it like any other token.
+ */
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-inter",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "Zaryab Sundhu",
   description: "Zaryab Sundhu - Senior Software Engineer | Full-Stack Developer",
   icons: {
-    icon: '/favicon.svg',
-    shortcut: '/favicon.svg',
-    apple: '/favicon.svg',
+    icon: "/favicon.svg",
+    shortcut: "/favicon.svg",
+    apple: "/favicon.svg",
   },
 };
 
@@ -24,17 +33,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="scroll-smooth">
-      <body className={inter.className}>
+    <html lang="en" className={inter.variable}>
+      <body className="overflow-x-hidden bg-bg font-sans text-text antialiased">
         <AuthProviderWrapper>
-          {/* <div className="mt-20"> */}
+          <ProgressBar />
           <Header />
-          {/* </div> */}
-
-          <main className="pt-4 -mt-8 bg-black">
-            <ProgressBar />
-            {children}
-          </main>
+          <main>{children}</main>
         </AuthProviderWrapper>
       </body>
     </html>
