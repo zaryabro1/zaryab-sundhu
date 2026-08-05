@@ -181,6 +181,13 @@
     transition: background 0.25s, border-color 0.25s, color 0.25s;
   }
 
+  /* Inline SVGs sit on the text baseline and reserve descender space below
+     themselves, which shifts an icon+label pair off-centre. From the design
+     system's own button rule. */
+  .btn svg {
+    display: block;
+  }
+
   .btn:disabled {
     opacity: 0.45;
     cursor: not-allowed;
@@ -293,6 +300,11 @@
     font-weight: 500;
     font-size: clamp(16px, 1.2vw, 22px);
     line-height: 1.2;
+    /* Card titles are real <h3> elements so projects and posts appear in the
+       document outline. The base heading rule tracks headings tighter than
+       card titles are drawn, so this pins the value the class rendered with as
+       a <div> — the tag change is structural only, never visual. */
+    letter-spacing: normal;
   }
 
   .card-body {

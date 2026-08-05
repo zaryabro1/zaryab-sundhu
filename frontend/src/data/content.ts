@@ -75,7 +75,10 @@ export const stats: Stat[] = [
 ];
 
 export const stacks: Stack[] = [
-  { name: "Frontend", items: "Next.js, Blade (Laravel), Razor Pages (ASP.NET)" },
+  {
+    name: "Frontend",
+    items: "Next.js, Blade (Laravel), Razor Pages (ASP.NET)",
+  },
   { name: "Backend", items: "Node.js, Laravel (PHP), ASP.NET, SharePoint" },
   { name: "Database", items: "MongoDB, PostgreSQL, MySQL" },
   { name: "Cloud", items: "AWS, GCP, Azure, Docker" },
@@ -125,16 +128,16 @@ export const jobs: Job[] = [
     role: "Full Stack Developer",
     company: "Allied Consultants",
     bullets: [
-      "Developed scalable web applications on the MERN stack",
+      "Developed scalable web applications on the ASP.NET (C#) with SharePoint and Laravel",
       "Optimized database queries, improving performance by 40%",
       "Integrated third-party APIs and payment gateways",
     ],
     tags: ["MongoDB", "Express", "Docker"],
   },
   {
-    years: "2016 — 2018",
+    years: "2019 — 2020",
     role: "Software Developer",
-    company: "StartUp Solutions",
+    company: "ICSS Engeneering",
     bullets: [
       "Built responsive web applications in modern JavaScript",
       "Implemented user authentication and authorization",
