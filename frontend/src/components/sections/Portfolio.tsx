@@ -103,7 +103,7 @@ export default function Portfolio() {
               <div className="card-kicker">
                 {projectCategories.find((c) => c.id === project.category)?.label}
               </div>
-              <div className="card-title">{project.title}</div>
+              <h3 className="card-title">{project.title}</h3>
               <p className="card-body">{project.description}</p>
 
               <div className="flex flex-wrap gap-1.5">

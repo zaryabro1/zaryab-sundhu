@@ -1,6 +1,7 @@
 import Section from "../../../components/ui/Section";
 import Reveal from "../../../components/ui/Reveal";
 import Magnetic from "../../../components/ui/Magnetic";
+import SocialIcon from "../../../components/ui/SocialIcon";
 import { profile, socialLinks } from "../../../data/site";
 import ContactForm from "./form";
 
@@ -45,7 +46,7 @@ export default function Contact() {
         </Reveal>
 
         <Reveal>
-          <div className="flex gap-2 pt-1.5">
+          <div className="flex flex-wrap gap-2 pt-1.5">
             {socialLinks.map((link) => (
               <Magnetic key={link.label}>
                 <a
@@ -54,6 +55,7 @@ export default function Contact() {
                   rel="noopener noreferrer"
                   className="btn btn-secondary"
                 >
+                  <SocialIcon name={link.label} />
                   {link.label}
                 </a>
               </Magnetic>

@@ -24,7 +24,7 @@ export const profile = {
   availability: "Open to senior & staff engineering roles",
   intro:
     "Six years building scalable web applications and microservices with Next.js, Node.js and AWS. Currently at TheHexaTown in Lahore.",
-  email: "zaryabro1@hotmail.com",
+  email: "zaryabro1@gmail.com",
   location: "Lahore, Pakistan",
   portrait: "/zaryab-profile.jpg",
   /* Stored under a URL-safe name; `resumeFilename` is what the visitor's
@@ -42,9 +42,17 @@ export const navItems: NavItem[] = [
   { id: "contact", label: "Contact" },
 ];
 
+/**
+ * Profile links. These render as buttons in the Contact section and also feed
+ * the `sameAs` array in the site's structured data, which is how a search
+ * engine ties this page to the same person elsewhere — so each one must be a
+ * real profile URL, never a platform home page.
+ */
 export const socialLinks: SocialLink[] = [
-  { label: "GitHub", href: "https://github.com" },
-  { label: "LinkedIn", href: "https://linkedin.com" },
+  { label: "GitHub", href: "https://github.com/zaryabro1" },
+  { label: "LinkedIn", href: "https://linkedin.com/in/zaryabro1" },
+  { label: "Instagram", href: "https://instagram.com/zaryabro1" },
+  { label: "X", href: "https://x.com/zaryabro1" },
 ];
 
 /** The marquee under the hero. */
