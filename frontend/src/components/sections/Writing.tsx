@@ -28,7 +28,7 @@ export default function Writing() {
                   <span>{post.category}</span>
                   <span>{post.date}</span>
                 </div>
-                <div className="card-title">{post.title}</div>
+                <h3 className="card-title">{post.title}</h3>
                 <p className="card-body">{post.excerpt}</p>
                 <div className="type-meta text-accent">Read more</div>
               </a>

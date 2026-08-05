@@ -166,7 +166,7 @@ export default function Hero() {
         >
           <Image
             src={profile.portrait}
-            alt={`Portrait of ${profile.name}`}
+            alt={`${profile.name}, ${profile.role} based in ${profile.location}`}
             width={400}
             height={400}
             priority
