@@ -1,78 +1,513 @@
-:root {
-  scroll-behavior: smooth;
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Add smooth sliding animation */
-.smooth-slide {
-  scroll-behavior: smooth;
-  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+/* ══════════════════════════════════════════════════════════════════════════
+   Nocturne — design tokens.
+
+   This block is the single source of truth for the site's look. Retune here;
+   `tailwind.config.js` maps its utility names onto these variables rather
+   than carrying its own copies, so the two cannot drift.
+
+   A quiet, compact dark interface: near-neutral blue-grey ground, Inter at
+   weight 500, 8px radii, and one accent used as a line and a glow rather
+   than a flood.
+   ══════════════════════════════════════════════════════════════════════ */
+
+:root {
+  --color-bg: #161826;
+  --color-surface: #232532;
+  --color-text: #e9e9ed;
+  --color-accent: #9184d9;
+
+  /* Tonal ramps — generated in OKLCH on one shared lightness scale, so the
+     same step of any role carries the same visual weight. */
+  --color-neutral-100: #f3f5fe;
+  --color-neutral-200: #e4e7f5;
+  --color-neutral-300: #cfd3e5;
+  --color-neutral-400: #b2b6ca;
+  --color-neutral-500: #9397ab;
+  --color-neutral-600: #75798c;
+  --color-neutral-700: #595d6c;
+  --color-neutral-800: #3f424d;
+  --color-neutral-900: #292b31;
+
+  --color-accent-100: #f5f4ff;
+  --color-accent-200: #e7e5fe;
+  --color-accent-300: #d2cefd;
+  --color-accent-400: #b5abfc;
+  --color-accent-500: #968ae0;
+  --color-accent-600: #796cbf;
+  --color-accent-700: #5d5294;
+  --color-accent-800: #423a6a;
+  --color-accent-900: #2b2741;
+
+  /* Text-on-ground alphas. Tailwind can't apply an opacity modifier to a
+     var()-backed color, so the tints this design leans on are their own
+     tokens — the same set the reference mockup carries. */
+  --t80: rgba(233, 233, 237, 0.8);
+  --t78: rgba(233, 233, 237, 0.78);
+  --t75: rgba(233, 233, 237, 0.75);
+  --t72: rgba(233, 233, 237, 0.72);
+  --t65: rgba(233, 233, 237, 0.65);
+  --t60: rgba(233, 233, 237, 0.6);
+  --t55: rgba(233, 233, 237, 0.55);
+  --t50: rgba(233, 233, 237, 0.5);
+  --t45: rgba(233, 233, 237, 0.45);
+  --t14: rgba(233, 233, 237, 0.14);
+  --t10: rgba(233, 233, 237, 0.1);
+  --t8: rgba(233, 233, 237, 0.08);
+  --t7: rgba(233, 233, 237, 0.07);
+  --t4: rgba(233, 233, 237, 0.04);
+
+  --color-divider: rgba(233, 233, 237, 0.16);
+  --glass: rgba(22, 24, 38, 0.72);
+
+  /* Rules fade to transparent at both ends over 48px — a Nocturne
+     signature. Painted as a background so it can ride a section's top edge
+     without an extra element. */
+  --rule: linear-gradient(
+    to right,
+    transparent,
+    var(--color-divider) 48px,
+    var(--color-divider) calc(100% - 48px),
+    transparent
+  );
+
+  /* Spacing at density 0.7x — this system is dense on purpose. */
+  --space-1: 2.8px;
+  --space-2: 5.6px;
+  --space-3: 8.4px;
+  --space-4: 11.2px;
+  --space-6: 16.8px;
+  --space-8: 22.4px;
+
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 14px;
+
+  /* On a dark ground, elevation is a hairline edge plus ambient darkness —
+     never a stack of heavy shadows. */
+  --shadow-sm: 0 0 0 1px #3f424d;
+  --shadow-md: 0 0 0 1px #595d6c, 0 6px 18px rgba(0, 0, 0, 0.55);
+  --shadow-lg: 0 0 0 1px #9397ab, 0 16px 40px rgba(0, 0, 0, 0.65);
 }
 
-/* Add smooth transitions to all sections */
-section {
-  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+/* ── base ──────────────────────────────────────────────────────────────── */
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    /* The floating pill nav sits over the top of every anchor target. */
+    scroll-padding-top: 96px;
+
+    /* The reading-progress bar reports scroll position, so the native
+       scrollbar is suppressed. Firefox and legacy Edge take a property;
+       WebKit needs the pseudo-element below. Scrolling itself — wheel, keys,
+       touch, and the progress bar — is untouched. */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  html::-webkit-scrollbar,
+  body::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    display: none;
+  }
+
+  body {
+    background: var(--color-bg);
+    color: var(--color-text);
+    font-size: 15px;
+    line-height: 1.55;
+  }
+
+  /* Hierarchy here is size and space — headings never bolden past 500. */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-weight: 500;
+    line-height: 1.12;
+    letter-spacing: -0.015em;
+  }
+
+  a {
+    color: var(--color-accent);
+    text-underline-offset: 3px;
+  }
+
+  a:hover {
+    color: var(--color-accent-400);
+  }
+
+  ::selection {
+    background: color-mix(in srgb, var(--color-accent) 30%, transparent);
+  }
+
+  /* Keyboard focus is themed, never the browser default. */
+  :focus {
+    outline: none;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
 }
 
-/* Timeline glow animation */
-.glow {
-  box-shadow: 0 0 15px rgba(217, 70, 239, 0.6);
-  animation: pulse 2s infinite;
+/* ── components ────────────────────────────────────────────────────────────
+   A port of the Nocturne component layer, so markup written against the
+   design system's documented class API works here unchanged.
+   ─────────────────────────────────────────────────────────────────────── */
+
+@layer components {
+  /* — buttons — the primary is an accent outline, never a fill — */
+  .btn {
+    @apply inline-flex cursor-pointer items-center justify-center gap-1.5 no-underline;
+    font-weight: 500;
+    /* Fluid so controls keep their weight against the type on a large panel;
+       the 14px floor is the design's own size, held through to laptops. */
+    font-size: clamp(14px, 1vw, 19px);
+    line-height: 1.2;
+    color: var(--color-text);
+    background: transparent;
+    border: 1px solid transparent;
+    padding: var(--space-2) calc(var(--space-3) * 1.2);
+    border-radius: var(--radius-md);
+    transition: background 0.25s, border-color 0.25s, color 0.25s;
+  }
+
+  .btn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+
+  .btn-primary {
+    color: var(--color-accent);
+    border-color: var(--color-accent);
+  }
+
+  .btn-primary:hover:not(:disabled) {
+    color: var(--color-accent);
+    background: color-mix(in srgb, var(--color-accent) 12%, transparent);
+  }
+
+  .btn-primary:active:not(:disabled) {
+    background: color-mix(in srgb, var(--color-accent) 22%, transparent);
+  }
+
+  .btn-secondary {
+    border-color: var(--color-divider);
+  }
+
+  .btn-secondary:hover:not(:disabled) {
+    color: var(--color-text);
+    background: color-mix(in srgb, var(--color-text) 7%, transparent);
+  }
+
+  .btn-secondary:active:not(:disabled) {
+    background: color-mix(in srgb, var(--color-text) 14%, transparent);
+  }
+
+  .btn-ghost {
+    color: var(--color-accent);
+    padding-inline: var(--space-1);
+  }
+
+  .btn-ghost:hover:not(:disabled) {
+    background: color-mix(in srgb, var(--color-accent) 10%, transparent);
+  }
+
+  .btn-ghost:active:not(:disabled) {
+    background: color-mix(in srgb, var(--color-accent) 18%, transparent);
+  }
+
+  .btn-block {
+    width: 100%;
+    margin-top: var(--space-2);
+  }
+
+  /* — forms — */
+  .field > label {
+    display: block;
+    font-size: 12px;
+    margin-bottom: 5px;
+    color: var(--t72);
+  }
+
+  .input {
+    width: 100%;
+    /* 16px minimum on touch widths: iOS Safari zooms the page in on focus
+       for anything smaller. */
+    min-height: 40px;
+    padding: 8px 10px;
+    font: inherit;
+    font-size: 16px;
+    color: var(--color-text);
+    caret-color: var(--color-accent);
+    background: var(--color-surface);
+    border: 1px solid var(--color-divider);
+    border-radius: var(--radius-md);
+    transition: border-color 0.25s;
+  }
+
+  .input::placeholder {
+    color: var(--t45);
+  }
+
+  .input:hover {
+    border-color: color-mix(in srgb, var(--color-text) 45%, transparent);
+  }
+
+  .input:focus-visible {
+    border-color: var(--color-accent);
+    outline-offset: 0;
+  }
+
+  textarea.input {
+    min-height: 90px;
+    resize: vertical;
+  }
+
+  /* — cards — */
+  .card {
+    @apply flex flex-col;
+    gap: var(--space-2);
+    padding: var(--space-3);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+  }
+
+  .card-kicker {
+    font-size: clamp(10px, 0.7vw, 13px);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+  }
+
+  .card-title {
+    font-weight: 500;
+    font-size: clamp(16px, 1.2vw, 22px);
+    line-height: 1.2;
+  }
+
+  .card-body {
+    margin: 0;
+    font-size: clamp(13px, 0.95vw, 17px);
+    line-height: 1.5;
+    opacity: 0.8;
+    flex: 1;
+  }
+
+  .card-meta {
+    @apply flex flex-wrap items-center;
+    gap: 6px;
+    font-size: clamp(11px, 0.8vw, 14px);
+    color: var(--t50);
+  }
+
+  .elev-sm {
+    box-shadow: var(--shadow-sm);
+  }
+
+  .elev-md {
+    box-shadow: var(--shadow-md);
+  }
+
+  .elev-lg {
+    box-shadow: var(--shadow-lg);
+  }
+
+  /* — tags — */
+  .tag {
+    @apply inline-flex items-center;
+    font-size: clamp(11px, 0.78vw, 14px);
+    letter-spacing: 0.02em;
+    padding: 3px 10px;
+    border-radius: calc(var(--radius-md) * 0.75);
+  }
+
+  .tag-accent {
+    background: var(--color-accent-800);
+    color: var(--color-accent-100);
+  }
+
+  .tag-neutral {
+    background: var(--color-neutral-800);
+    color: var(--color-neutral-100);
+  }
+
+  .tag-outline {
+    border: 1px solid var(--color-accent);
+    color: var(--color-accent);
+  }
+
+  /* — layout — landing sections are edged by the fading rule — */
+  .section-rule {
+    background: var(--rule) no-repeat top / 100% 1px;
+  }
+
+  /* ── fluid type scale ──────────────────────────────────────────────────
+     Nocturne specifies its type in fixed pixels, which holds from phones to
+     laptops but leaves a large display reading like a shrunken screenshot.
+     These clamps keep the design's sizes across the range it was drawn for,
+     then let them grow on bigger panels.
+
+     Each clamp is min / preferred / max. The vw slopes are set so the
+     preferred value lands on Nocturne's own pixel size at ~1440px — the width
+     the system was drawn for — with the min holding phones and the max
+     stopping growth around 1900px so a 4K panel doesn't get billboard text.
+     ──────────────────────────────────────────────────────────────────── */
+
+  .type-display {
+    /* Hero name — 96px at 1440, the reference size. */
+    font-size: clamp(52px, 7vw, 132px);
+    line-height: 0.98;
+    letter-spacing: -0.04em;
+  }
+
+  .type-h2 {
+    /* 32px at 1440. */
+    font-size: clamp(26px, 2.3vw, 44px);
+    line-height: 1.15;
+    letter-spacing: -0.025em;
+  }
+
+  /* The longer statement headings in About and Contact run one step larger. */
+  .type-h2-lead {
+    /* 38px at 1440. */
+    font-size: clamp(28px, 2.7vw, 50px);
+    line-height: 1.15;
+    letter-spacing: -0.025em;
+    text-wrap: pretty;
+  }
+
+  .type-h3 {
+    /* 19px at 1440. */
+    font-size: clamp(17px, 1.35vw, 26px);
+    line-height: 1.2;
+  }
+
+  .type-lead {
+    /* 17.5px at 1440. */
+    font-size: clamp(16px, 1.22vw, 24px);
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+
+  .type-body {
+    /* 16.5px at 1440. */
+    font-size: clamp(16px, 1.15vw, 22px);
+    line-height: 1.7;
+  }
+
+  .type-ui {
+    /* 14.5px at 1440. */
+    font-size: clamp(14px, 1vw, 19px);
+  }
+
+  .type-meta {
+    /* 12px at 1440. */
+    font-size: clamp(12px, 0.85vw, 16px);
+  }
+
+  .type-kicker {
+    /* 11px at 1440. */
+    font-size: clamp(10px, 0.75vw, 14px);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .type-stat {
+    /* 36px at 1440. */
+    font-size: clamp(32px, 2.5vw, 52px);
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+  }
+
+  /* The shared page column. Grows in steps rather than fluidly so the
+     measure stays comfortable — text that simply tracks the viewport gets
+     unreadably wide on an ultrawide monitor. */
+  .container-page {
+    width: 100%;
+    max-width: 1240px;
+    margin-inline: auto;
+  }
+
+  @media (min-width: 1920px) {
+    .container-page {
+      max-width: 1560px;
+    }
+  }
+
+  @media (min-width: 2560px) {
+    .container-page {
+      max-width: 1880px;
+    }
+  }
 }
 
-@keyframes pulse {
-  0% {
-    box-shadow: 0 0 15px rgba(217, 70, 239, 0.6);
+/* ── motion ────────────────────────────────────────────────────────────── */
+
+@keyframes zs-ticker {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes zs-pulse {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: scale(1);
   }
   50% {
-    box-shadow: 0 0 25px rgba(217, 70, 239, 0.9);
-  }
-  100% {
-    box-shadow: 0 0 15px rgba(217, 70, 239, 0.6);
+    opacity: 1;
+    transform: scale(1.35);
   }
 }
 
-
-
-/* Progress Bar Styles */
-.progress-bar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 0%;
-  height: 4px;
-  background: linear-gradient(90deg, rgba(59, 130, 246, 1), rgba(168, 85, 247, 1));
-  z-index: 1000;
-  transition: width 0.3s ease;
+@keyframes zs-caret {
+  0%,
+  45% {
+    opacity: 1;
+  }
+  50%,
+  95% {
+    opacity: 0;
+  }
 }
 
-/* Hide default scrollbar */
-::-webkit-scrollbar {
-  display: none;
+.animate-ticker {
+  animation: zs-ticker 34s linear infinite;
 }
 
-/* Progress Bar Effect */
-body {
-  --scroll: calc(var(--scroll-y) / (var(--scroll-height) - 100vh) * 100);
-  background: linear-gradient(
-    to right,
-    rgba(59, 130, 246, 0.2) 0%,
-    rgba(59, 130, 246, 0.2) var(--scroll),
-    transparent var(--scroll)
-  );
+.animate-pulse-dot {
+  animation: zs-pulse 2.4s ease-in-out infinite;
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-    to bottom,
-    transparent,
-    rgb(var(--background-end-rgb))
-  );
+.animate-caret {
+  animation: zs-caret 1.1s step-end infinite;
+}
+
+/* Anything decorative stops when the visitor has asked for less motion. The
+   JS motion hooks read the same media query, so this only has to cover the
+   purely CSS-driven animation. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .animate-ticker,
+  .animate-pulse-dot,
+  .animate-caret {
+    animation: none;
+  }
 }

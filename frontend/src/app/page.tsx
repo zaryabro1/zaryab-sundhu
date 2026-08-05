@@ -1,25 +1,24 @@
-import Hero from "./components/hero/page";
-import About from "./components/about/page";
-import Header from "./components/header/page";
-import Skills from "./components/skills/page";
-import Experience from "./components/experience/page";
-import Portfolio from "./components/portfolio/page";
-import Blog from "./components/blog/page";
-import Contact from "./components/contact/page";
-import Footer from "./components/footer/page";
+import Hero from "../components/sections/Hero";
+import Ticker from "../components/sections/Ticker";
+import About from "../components/sections/About";
+import Skills from "../components/sections/Skills";
+import Experience from "../components/sections/Experience";
+import Portfolio from "../components/sections/Portfolio";
+import Writing from "../components/sections/Writing";
+import Footer from "../components/sections/Footer";
+import Contact from "./components/contact/Contact";
 
 export default function Home() {
   return (
     <>
-      <main className="min-h-screen">
-        <Hero />
-        <About />
-        <Skills />
-        <Experience />
-        <Portfolio />
-        <Blog />
-        <Contact />
-      </main>
+      <Hero />
+      <Ticker />
+      <About />
+      <Skills />
+      <Experience />
+      <Portfolio />
+      <Writing />
+      <Contact />
       <Footer />
     </>
   );
