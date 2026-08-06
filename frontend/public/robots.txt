@@ -1,15 +1,22 @@
-# *
+# This build is not for public search results.
+#
+# Crawling is deliberately left OPEN here, which looks backwards but is not:
+# `Disallow: /` blocks crawling, not indexing. A blocked crawler can never
+# fetch the page, so it never sees the `noindex` this app sends on every
+# response (as a meta tag from the root layout, and as an `X-Robots-Tag`
+# header from next.config.js). A URL that is already indexed, or that anyone
+# links to, would then stay in results as a bare entry that nothing can
+# remove.
+#
+# Allowing the crawl is what lets `noindex` be read and obeyed, which is what
+# actually keeps this site out of the index.
+#
+# Once Search Console reports zero indexed pages, this can be tightened to a
+# hard `Disallow: /` to stop the crawl traffic as well. Do that only after
+# deindexing has happened, never before.
+
 User-agent: *
 Allow: /
 
-# Host
-Host: https://zaryabro1.com
-
-# Sitemaps
-Sitemap: https://zaryabro1.com/sitemap.xml
-
-# Allow all bots to access everything
-Disallow:
-
-# Crawl-delay
-Crawl-delay: 10
+# No sitemap is published. Advertising URLs for indexing would contradict the
+# noindex this site sends on every one of them.

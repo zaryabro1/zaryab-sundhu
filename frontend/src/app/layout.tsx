@@ -16,6 +16,27 @@ export const metadata: Metadata = {
     shortcut: '/favicon.svg',
     apple: '/favicon.svg',
   },
+  /**
+   * This build must not appear in search results.
+   *
+   * Declared on the root layout so every route inherits it — no page defines
+   * its own `robots`, so the whole app is covered from one place. This pairs
+   * with the `X-Robots-Tag` header in `next.config.js`: the header reaches
+   * non-HTML assets, this reaches crawlers that only parse the document.
+   *
+   * `googleBot` is spelled out separately because Google honours its own
+   * directives over the generic ones when both are present.
+   */
+  robots: {
+    index: false,
+    follow: false,
+    nocache: true,
+    googleBot: {
+      index: false,
+      follow: false,
+      noimageindex: true,
+    },
+  },
 };
 
 export default function RootLayout({
