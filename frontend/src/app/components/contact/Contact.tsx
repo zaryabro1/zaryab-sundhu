@@ -10,8 +10,18 @@ import ContactForm from "./form";
  *
  * The form is a separate client component, so this section stays on the
  * server.
+ *
+ * The copy addresses the reader rather than announcing the author: a visitor
+ * arriving here is deciding whether to spend two minutes on a stranger, and
+ * "Get in touch" gave them no reason to. The mailto beside the form is the
+ * escape hatch for everyone who will never fill in a form at all.
  */
 export default function Contact() {
+  /* Pre-addressed so the alternative path costs one click and no thinking. */
+  const mailtoHref = `mailto:${profile.email}?subject=${encodeURIComponent(
+    "Role for Zaryab Sundhu"
+  )}`;
+
   return (
     <Section
       id="contact"
@@ -19,26 +29,24 @@ export default function Contact() {
     >
       <div className="flex flex-1 flex-col gap-4">
         <Reveal>
-          <div className="type-kicker text-accent">Contact</div>
+          {/* Neutral, so the accent in this view belongs to the actions. */}
+          <div className="type-kicker text-t-55">Contact</div>
         </Reveal>
 
         <Reveal>
-          <h2 className="type-h2-lead m-0">Get in touch</h2>
+          <h2 className="type-h2-lead m-0">Tell me what you&rsquo;re building</h2>
         </Reveal>
 
         <Reveal>
           <p className="type-lead m-0 max-w-[44ch] text-t-72">
-            Open to senior and staff engineering roles. Email is the fastest way
-            to reach me — I reply within a day.
+            {profile.availability}. Pick what brings you here and the message
+            writes its own opening line — I read every one myself.
           </p>
         </Reveal>
 
         <Reveal>
           <div className="type-ui flex flex-col gap-1.5">
-            <a
-              href={`mailto:${profile.email}`}
-              className="break-all no-underline"
-            >
+            <a href={mailtoHref} className="break-all no-underline">
               {profile.email}
             </a>
             <span className="text-t-55">{profile.location}</span>

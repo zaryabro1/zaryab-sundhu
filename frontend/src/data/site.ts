@@ -55,6 +55,45 @@ export const socialLinks: SocialLink[] = [
   { label: "X", href: "https://x.com/zaryabro1" },
 ];
 
+export interface ContactIntent {
+  id: string;
+  /** Shown on the chip. Names an audience, not an action. */
+  label: string;
+  /** Dropped into the message field so the visitor edits instead of composes. */
+  template: string;
+}
+
+/**
+ * The three reasons anyone reaches this form.
+ *
+ * An empty textarea asks a stranger to write a cold email from scratch, which
+ * is the most expensive thing a page can ask for. Naming the audiences out
+ * loud lets each visitor recognise themselves, and the template turns the ask
+ * into filling two blanks.
+ *
+ * The placeholder brackets are left as plain text on purpose — they read as
+ * obvious gaps, so nobody sends one unedited without noticing.
+ */
+export const contactIntents: ContactIntent[] = [
+  {
+    id: "hiring",
+    label: "Hiring for a role",
+    template:
+      "Hi Zaryab — we're hiring a ⟨role⟩ at ⟨company⟩.\n\nThe team works on ",
+  },
+  {
+    id: "contract",
+    label: "Contract work",
+    template:
+      "Hi Zaryab — we have a project we'd like help with at ⟨company⟩.\n\nThe scope is roughly ",
+  },
+  {
+    id: "other",
+    label: "Something else",
+    template: "Hi Zaryab — ",
+  },
+];
+
 /** The marquee under the hero. */
 export const tickerItems: string[] = [
   "Next.js",
